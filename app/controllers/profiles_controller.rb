@@ -13,6 +13,10 @@ class ProfilesController < ApplicationController
                   .order(params[:order_by] || "name ASC")
   end
 
+  def new
+    @profile = Profile.new
+  end
+
   def create
     begin
       Profile.create!(profile_params)

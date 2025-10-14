@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
   get '/profiles' => 'profiles#index', as: :profiles
+  get '/profiles/new' => 'profiles#new', as: :profiles_new
   post '/profiles' => 'profiles#create'
   post '/profile_reload' => 'profiles#reload'
 
