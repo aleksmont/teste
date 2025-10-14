@@ -10,30 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_11_015603) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_14_130309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pgcrypto"
 
-  create_table "user_sessions", force: :cascade do |t|
-    t.datetime "logged_at"
-    t.boolean "revoked", default: false
-    t.string "ip_address"
-    t.string "city"
-    t.string "state"
-    t.string "country"
+  create_table "profiles", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.string "name", null: false
+    t.string "github_url", null: false
+    t.string "github_username", null: false
+    t.integer "github_followers_number", null: false
+    t.integer "github_following_number", null: false
+    t.integer "github_starts_number", null: false
+    t.integer "github_last_year_contributions_number", null: false
+    t.string "github_profile_image_url", null: false
+    t.string "github_organization", null: false
+    t.string "github_location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_user_sessions_on_user_id"
+    t.datetime "deleted_at", precision: nil
   end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "user_sessions", "users"
 end

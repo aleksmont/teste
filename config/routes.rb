@@ -11,10 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-
-  resource :users
-
-  get '/auth/login' => 'auth#login'
-  post '/auth/authenticate' => 'auth#authenticate'
-  post '/auth/logout' => 'auth#logout'
+  get '/profiles' => 'profiles#index', as: :profiles
+  post '/profiles' => 'profiles#create'
+  post '/profile_reload' => 'profiles#reload'
 end

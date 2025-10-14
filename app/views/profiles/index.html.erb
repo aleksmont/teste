@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Aleksander's Github Webscrapper</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="home" href="/">Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="profiles" href="#">Perfis</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4 mb-5">
+  <h1>Perfis cadastrados</h1>
+  <p class="text-muted">Foram encontrados 123 resultados</p>
+
+  <hr>
+
+  <div class="list-group mb-3">
+    <ul class="list-group shadow-sm">
+      <% @profiles.each do |profile| %>
+        <li class="list-group-item d-flex align-items-center">
+
+          <img
+            src="<%= profile.github_profile_image_url %>"
+            alt="Foto de Perfil de João"
+            class="avatar rounded-circle me-3"
+          >
+
+          <div class="me-auto">
+            <h5 class="my-0"><%= profile.name %></h5>
+
+            <p class="text-muted my-0"><%= profile.github_username %></p>
+            <p class="text-muted my-0"><%= profile.github_followers_number %></p>
+            <p class="text-muted my-0"><%= profile.github_following_number %></p>
+            <p class="text-muted my-0"><%= profile.github_starts_number %></p>
+            <p class="text-muted my-0"><%= profile.github_last_year_contributions_number %></p>
+            <p class="text-muted my-0"><%= profile.github_organization %></p>
+            <p class="text-muted my-0"><%= profile.github_location %></p>
+          </div>
+
+          <form class="d-flex" role="search">
+            <input type="hidden" name="profile_uuid" value="<%= profile.uuid %>">
+            <button class="btn btn-primary btn-sm ms-3" type="submit">Recarregar informações</button>
+          </form>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+
+  <nav aria-label="Resultados da busca">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link">Anterior</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Próximo</a>
+      </li>
+    </ul>
+  </nav>
+</div>

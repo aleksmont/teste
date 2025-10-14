@@ -1,61 +1,79 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Meu Site</a>
+    <a class="navbar-brand" href="#">Aleksander's Github Webscrapper</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Busca</a>
+          <a class="nav-link active" aria-current="page" href="#">Cadastro</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="profiles" href="/profiles">Perfis</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" name="q">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
     </div>
   </div>
 </nav>
 
-<div class="container mt-4 mb-5">
-  <h1>Resultados da Busca por: "Bootstrap"</h1>
-  <p class="text-muted">Foram encontrados 123 resultados em 0.45 segundos.</p>
+<!--<div class="container mt-4 mb-5">-->
+<!--  <h1>Resultados da Busca por: "Bootstrap"</h1>-->
+<!--  <p class="text-muted">Foram encontrados 123 resultados em 0.45 segundos.</p>-->
 
-  <hr>
+<!--  <hr>-->
 
-  <div class="list-group mb-3">
-    <a href="#" class="list-group-item list-group-item-action">
-      <h5 class="mb-1 text-primary">Templates Gratuitos de Navbar com Busca</h5>
-      <p class="mb-1">Uma coleção de designs de barras de navegação que incluem a funcionalidade de busca.</p>
-      <small class="text-success">siteexemplo.com/templates/navbar-search</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <h5 class="mb-1 text-primary">Como estilizar o campo de busca do Bootstrap</h5>
-      <p class="mb-1">Um tutorial detalhado sobre como customizar o `form-control` para buscas.</p>
-      <small class="text-success">blogdev.com/tutorial/search-input</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <h5 class="mb-1 text-primary">Componentes de Formulário no Bootstrap</h5>
-      <p class="mb-1">Visão geral sobre todos os componentes de formulário, incluindo input e botões para a busca.</p>
-      <small class="text-success">getbootstrap.com/docs/5.3/forms/overview</small>
-    </a>
+<!--  <div class="list-group mb-3">-->
+<!--    <a href="#" class="list-group-item list-group-item-action">-->
+<!--      <h5 class="mb-1 text-primary">Templates Gratuitos de Navbar com Busca</h5>-->
+<!--      <p class="mb-1">Uma coleção de designs de barras de navegação que incluem a funcionalidade de busca.</p>-->
+<!--      <small class="text-success">siteexemplo.com/templates/navbar-search</small>-->
+<!--    </a>-->
+<!--    <a href="#" class="list-group-item list-group-item-action">-->
+<!--      <h5 class="mb-1 text-primary">Como estilizar o campo de busca do Bootstrap</h5>-->
+<!--      <p class="mb-1">Um tutorial detalhado sobre como customizar o `form-control` para buscas.</p>-->
+<!--      <small class="text-success">blogdev.com/tutorial/search-input</small>-->
+<!--    </a>-->
+<!--    <a href="#" class="list-group-item list-group-item-action">-->
+<!--      <h5 class="mb-1 text-primary">Componentes de Formulário no Bootstrap</h5>-->
+<!--      <p class="mb-1">Visão geral sobre todos os componentes de formulário, incluindo input e botões para a busca.</p>-->
+<!--      <small class="text-success">getbootstrap.com/docs/5.3/forms/overview</small>-->
+<!--    </a>-->
+<!--  </div>-->
+
+<!--  <nav aria-label="Resultados da busca">-->
+<!--    <ul class="pagination justify-content-center">-->
+<!--      <li class="page-item disabled">-->
+<!--        <a class="page-link">Anterior</a>-->
+<!--      </li>-->
+<!--      <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+<!--      <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--      <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--      <li class="page-item">-->
+<!--        <a class="page-link" href="#">Próximo</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--</div>-->
+
+<!-- app/views/users/new.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h3>Cadastro</h3>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for @profile do |f| %>
+            <%= f.input :name, required: true %>
+            <%= f.input :github_url, required: true %>
+            <div class="text-center">
+              <%= f.button :submit, "Cadastrar", class: "btn btn-success mt-3" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <nav aria-label="Resultados da busca">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link">Anterior</a>
-      </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Próximo</a>
-      </li>
-    </ul>
-  </nav>
 </div>

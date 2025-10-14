@@ -1,23 +1,34 @@
-class User < ApplicationRecord
-  has_secure_password
-
-  #
-  # Realtions
-  #
-  has_many :user_sessions
+class Profile < ApplicationRecord
 
   #
   # Validations
   #
 
-  validates :name, presence: true, length: { minimum: 5, maximum: 128 }
-  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :github_url, presence: true, uniqueness: true
 
   #
   # Lifecycle
   #
 
-  before_create :email_valid?, :password_valid?
+  # before_create :email_valid?, :password_valid?
+  before_create :complete_info
+
+  def complete_info
+    self.github_username = 'github_username4'
+    self.github_followers_number = 1
+    self.github_following_number = 1
+    self.github_starts_number = 1
+    self.github_last_year_contributions_number = 1
+    self.github_profile_image_url = 'github_profile_image_url'
+    self.github_organization = 'github_username'
+    self.github_location = 'github_username'
+  end
+
+  def reload_info
+    self.complete_info
+    self.save
+  end
 
   def email_valid?
     # formato local-part@domain, sendo que: ○
@@ -97,4 +108,5 @@ class User < ApplicationRecord
       throw :abort
     end
   end
+
 end
