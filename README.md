@@ -17,6 +17,7 @@ Gems utilizadas:
 * kaminari - paginação dos resultados, melhoria de UX 
 * rails_url_shortener - para a funcionalidade de encurtamnto de urls e geração de captura de dados (ip, geolocation ...)
 * rspec - gerenciador de testes
+* selenium - Foi necessario para conseguir achar conteudos dinamicos, fora do codigo fonte estatico
 
 ``OBS: Poderiam ter sido utilizados serviços terceiros, como o bitly. porem só permite poucos links por mês e ia dificultar os testes``
 

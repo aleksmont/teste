@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 require "httparty"
 require "nokogiri"
+require "selenium-webdriver"
 
 module ScrapperHelper
 
   def get_content(url)
-    response = HTTParty.get(url)
+    response = HTTParty.get(url, {timeout: 60})
     Nokogiri::HTML(response.body)
   end
 
@@ -24,7 +25,6 @@ module ScrapperHelper
 
   def search(url)
     begin
-      url = url + '?tab=stars'
       document = get_content(url)
 
       github_followers_number = 0
@@ -59,32 +59,7 @@ module ScrapperHelper
         end
       end
 
-
-      github_last_year_contributions_number = 0
-      puts 'github_last_year_contributions_number'
-      puts 'github_last_year_contributions_number'
-      puts 'github_last_year_contributions_number'
-
-      puts document.css('#js-contribution-activity-description')
-
-      # document.css(".vcard-detail.pt-1.hide-sm.hide-md").each do |a|
-      #   # if a.text.to_s.include? 'contributions'
-      #   puts a.text
-      #   # end
-      #
-      #   # if a.attribute("href").to_s.include? 'tab=stars'
-      #   #   github_starts_number = a.css("span").text.to_s.strip.delete("^0-9")
-      #   # end
-      # end
-
-      # document.css(".d-flex").each do |a|
-      #   # puts a.text
-      #   if a.text.to_s.include? "last year"
-      #     puts a.text
-      #   end
-      #
-      # end
-
+      github_last_year_contributions_number = get_contributions(url)
 
       {
         success: true,
@@ -106,6 +81,29 @@ module ScrapperHelper
         data: nil
       }
     end
+  end
+
+  def get_contributions(url)
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+
+    driver = Selenium::WebDriver.for :chrome, options: options
+
+    driver.navigate.to url
+
+    html = driver.page_source
+
+    doc = Nokogiri::HTML(html)
+
+    contribution = doc.at_css('#js-contribution-activity-description').text.to_s.strip.delete("^0-9")
+
+    # close the browser and release its resources
+    driver.quit
+
+    contribution
   end
 
 end
