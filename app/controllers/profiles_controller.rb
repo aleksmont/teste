@@ -6,20 +6,17 @@ class ProfilesController < ApplicationController
     end
 
     @profiles = Profile
-                  # .order(:id)
                   .page(params[:page] || 1)
-                  .per(params[:per_page] || 10)
+                  .per(params[:per_page] || 5)
                   .order(params[:order_by] || "name ASC")
   end
 
   def create
     begin
       Profile.create!(profile_params)
-      redirect_to root_path, notice: "User was successfully created."
+      redirect_to root_path, notice: "Profile criado com sucesso."
     rescue StandardError => e
-      puts e
-      puts e.message
-      redirect_to root_path, notice: "errr."
+      redirect_to root_path, alert: "Atenção, não conseguimos criar o perfil com as informações inseridas."
     end
   end
 

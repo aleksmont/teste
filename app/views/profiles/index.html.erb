@@ -17,8 +17,7 @@
   </div>
 </nav>
 
-<main class="container my-4">
-
+<div class="container my-4">
   <%# INÍCIO DA EXIBIÇÃO DO FLASH/NOTICE %>
   <% flash.each do |msg_type, message| %>
     <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
@@ -27,9 +26,7 @@
     </div>
   <% end %>
   <%# FIM DA EXIBIÇÃO DO FLASH/NOTICE %>
-
-  <%= yield %>
-</main>
+</div>
 
 <div class="container mt-4 mb-5">
   <h1>Perfis cadastrados</h1>
