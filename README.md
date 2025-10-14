@@ -16,10 +16,10 @@ Gems utilizadas:
 * httparty, nokogiri - para a funcionalidade do scrapper
 * kaminari - paginação dos resultados, melhoria de UX 
 * rails_url_shortener - para a funcionalidade de encurtamnto de urls e geração de captura de dados (ip, geolocation ...)
+* rspec - gerenciador de testes
 
 ``OBS: Poderiam ter sido utilizados serviços terceiros, como o bitly. porem só permite poucos links por mês e ia dificultar os testes``
 
-* Test unitario escrito em minitest: [ip_helper_test.rb](test/helpers/ip_helper_test.rb)
-* 
+* Test unitario usando rspec: [ip_helper_test.rb](test/helpers/ip_helper_test.rb)
 
 

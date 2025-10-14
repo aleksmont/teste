@@ -34,7 +34,7 @@ class Profile < ApplicationRecord
 
   def reload_info
     self.complete_info
-    # self.save
+    self.save
   end
 
   def email_valid?
