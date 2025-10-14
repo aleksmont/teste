@@ -12,7 +12,11 @@ class Profile < ApplicationRecord
   #
 
   # before_create :email_valid?, :password_valid?
-  before_create :complete_info
+  before_create :complete_info, :short_github_url
+
+  def short_github_url
+    self.github_url = RailsUrlShortener::Url.generate(self.github_url).key
+  end
 
   def complete_info
 

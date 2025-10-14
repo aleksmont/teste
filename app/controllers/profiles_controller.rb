@@ -16,6 +16,7 @@ class ProfilesController < ApplicationController
       Profile.create!(profile_params)
       redirect_to root_path, notice: "Profile criado com sucesso."
     rescue StandardError => e
+      puts e.message
       redirect_to root_path, alert: "Atenção, não conseguimos criar o perfil com as informações inseridas."
     end
   end

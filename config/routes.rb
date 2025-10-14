@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get '/profiles' => 'profiles#index', as: :profiles
   post '/profiles' => 'profiles#create'
   post '/profile_reload' => 'profiles#reload'
+
+  mount RailsUrlShortener::Engine, at: "/"
 end

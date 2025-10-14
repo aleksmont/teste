@@ -9,15 +9,15 @@ default: &default
 
 development:
   <<: *default
-  database: <%= "#{ENV.fetch('APP_NAME', 'alugest-api').parameterize.underscore}_development" %>
+  database: <%= "#{ENV.fetch('APP_NAME', 'webscrapper').parameterize.underscore}_development" %>
 
 test:
   <<: *default
-  database: <%= "#{ENV.fetch('APP_NAME', 'alugest-api').parameterize.underscore}_test" %>
+  database: <%= "#{ENV.fetch('APP_NAME', 'webscrapper').parameterize.underscore}_test" %>
 
 production:
   #  <<: *default
-  #  database: <%#= ENV.fetch('POSTGRES_DB_NAME', 'alugest-api_production') %>
+  #  database: <%#= ENV.fetch('POSTGRES_DB_NAME', 'webscrapper_production') %>
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
