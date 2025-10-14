@@ -17,9 +17,23 @@
   </div>
 </nav>
 
+<main class="container my-4">
+
+  <%# INÍCIO DA EXIBIÇÃO DO FLASH/NOTICE %>
+  <% flash.each do |msg_type, message| %>
+    <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
+      <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+  <%# FIM DA EXIBIÇÃO DO FLASH/NOTICE %>
+
+  <%= yield %>
+</main>
+
 <div class="container mt-4 mb-5">
   <h1>Perfis cadastrados</h1>
-  <p class="text-muted">Foram encontrados 123 resultados</p>
+  <p class="text-muted">Foram encontrados <%= @profiles.total_count %> resultados</p>
 
   <hr>
 
@@ -37,13 +51,14 @@
           <div class="me-auto">
             <h5 class="my-0"><%= profile.name %></h5>
 
-            <p class="text-muted my-0"><%= profile.github_username %></p>
-            <p class="text-muted my-0"><%= profile.github_followers_number %></p>
-            <p class="text-muted my-0"><%= profile.github_following_number %></p>
-            <p class="text-muted my-0"><%= profile.github_starts_number %></p>
-            <p class="text-muted my-0"><%= profile.github_last_year_contributions_number %></p>
-            <p class="text-muted my-0"><%= profile.github_organization %></p>
-            <p class="text-muted my-0"><%= profile.github_location %></p>
+            <p class="text-muted my-0"><b>Username: </b><%= profile.github_username %></p>
+            <p class="text-muted my-0"><b>Followers: </b><%= profile.github_followers_number %></p>
+            <p class="text-muted my-0"><b>Following: </b><%= profile.github_following_number %></p>
+            <p class="text-muted my-0"><b>Stars: </b><%= profile.github_starts_number %></p>
+            <p class="text-muted my-0">
+              <b>Contribuições no ultimo ano: </b><%= profile.github_last_year_contributions_number %></p>
+            <p class="text-muted my-0"><b>Organização: </b><%= profile.github_organization %></p>
+            <p class="text-muted my-0"><b>Localização: </b><%= profile.github_location %></p>
           </div>
 
           <form class="d-flex" role="search">
@@ -56,17 +71,5 @@
     </ul>
   </div>
 
-  <nav aria-label="Resultados da busca">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link">Anterior</a>
-      </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Próximo</a>
-      </li>
-    </ul>
-  </nav>
+  <%= paginate @profiles, nav_class: 'custom-nav-class' %>
 </div>

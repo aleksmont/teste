@@ -15,19 +15,22 @@ class Profile < ApplicationRecord
   before_create :complete_info
 
   def complete_info
-    self.github_username = 'github_username4'
-    self.github_followers_number = 1
-    self.github_following_number = 1
-    self.github_starts_number = 1
+
+    info = Scraper::search(self.github_url)
+
+    self.github_username = info[:github_username]
+    self.github_followers_number = info[:github_followers_number]
+    self.github_following_number = info[:github_following_number]
+    self.github_starts_number = info[:github_starts_number]
     self.github_last_year_contributions_number = 1
-    self.github_profile_image_url = 'github_profile_image_url'
-    self.github_organization = 'github_username'
-    self.github_location = 'github_username'
+    self.github_profile_image_url = info[:github_profile_image_url]
+    self.github_organization = info[:github_organization]
+    self.github_location = info[:github_location]
   end
 
   def reload_info
     self.complete_info
-    self.save
+    # self.save
   end
 
   def email_valid?

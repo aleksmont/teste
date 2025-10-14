@@ -5,7 +5,11 @@ class ProfilesController < ApplicationController
       Profile.find_by!(uuid: params[:profile_uuid]).reload_info
     end
 
-    @profiles = Profile.order(:id)
+    @profiles = Profile
+                  # .order(:id)
+                  .page(params[:page] || 1)
+                  .per(params[:per_page] || 10)
+                  .order(params[:order_by] || "name ASC")
   end
 
   def create
