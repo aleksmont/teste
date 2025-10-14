@@ -36,18 +36,63 @@
     <div class="col-md-6">
       <div class="card shadow-sm">
         <div class="card-header text-center">
-          <h3>Cadastro</h3>
+          <h3>Buscar</h3>
         </div>
         <div class="card-body">
-          <%= simple_form_for @profile do |f| %>
-            <%= f.input :name, required: true %>
-            <%= f.input :github_url, required: true %>
-            <div class="text-center">
-              <%= f.button :submit, "Cadastrar", class: "btn btn-success mt-3" %>
-            </div>
-          <% end %>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" name="search" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="btn btn-outline-success" type="submit">
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container mt-4 mb-5">
+  <h1>Perfis cadastrados</h1>
+  <p class="text-muted">Foram encontrados <%= @profiles.total_count %> resultados</p>
+
+  <hr>
+
+  <div class="list-group mb-3">
+    <ul class="list-group shadow-sm">
+      <% @profiles.each do |profile| %>
+        <li class="list-group-item d-flex align-items-center">
+
+          <img
+            src="<%= profile.github_profile_image_url %>"
+            alt="Foto de Perfil de João"
+            class="avatar rounded-circle me-3"
+          >
+
+          <div class="me-auto">
+            <h5 class="my-0"><%= profile.name %></h5>
+
+            <p class="text-muted my-0"><b>Username: </b><%= profile.github_username %></p>
+            <p class="text-muted my-0"><b>Followers: </b><%= profile.github_followers_number %></p>
+            <p class="text-muted my-0"><b>Following: </b><%= profile.github_following_number %></p>
+            <p class="text-muted my-0"><b>Stars: </b><%= profile.github_starts_number %></p>
+            <p class="text-muted my-0">
+              <b>Contribuições no ultimo ano: </b><%= profile.github_last_year_contributions_number %></p>
+            <p class="text-muted my-0"><b>Organização: </b><%= profile.github_organization %></p>
+            <p class="text-muted my-0"><b>Localização: </b><%= profile.github_location %></p>
+
+            <p class="text-muted my-0"><b>Link do github: </b><a target="_blank" href="<%= profile.github_short_url %>">Click
+              aqui</a></p>
+          </div>
+
+          <form class="d-flex" role="search">
+            <input type="hidden" name="profile_uuid" value="<%= profile.uuid %>">
+            <button class="btn btn-primary btn-sm ms-3" type="submit">Recarregar informações</button>
+          </form>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
+
+<%= paginate @profiles, nav_class: 'custom-nav-class' %>
