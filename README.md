@@ -20,6 +20,6 @@ Gems utilizadas:
 
 ``OBS: Poderiam ter sido utilizados serviços terceiros, como o bitly. porem só permite poucos links por mês e ia dificultar os testes``
 
-* Test unitario usando rspec: [ip_helper_test.rb](test/helpers/ip_helper_test.rb)
+* Test unitario usando rspec: [scrapper_helper_spec.rb](spec/helpers/scrapper_helper_spec.rb)
 
 

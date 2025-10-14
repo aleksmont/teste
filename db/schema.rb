@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_171256) do
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
     t.string "github_url", null: false
+    t.string "github_short_url", null: false
     t.string "github_username", null: false
     t.integer "github_followers_number", null: false
     t.integer "github_following_number", null: false

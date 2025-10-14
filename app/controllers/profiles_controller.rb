@@ -2,7 +2,9 @@ class ProfilesController < ApplicationController
 
   def index
     if params[:profile_uuid]
-      Profile.find_by!(uuid: params[:profile_uuid]).reload_info
+      profile = Profile.find_by!(uuid: params[:profile_uuid])
+      profile.reload_info
+      flash[:notice] = "Informações do Perfil #{profile.name} recarregados com sucesso"
     end
 
     @profiles = Profile

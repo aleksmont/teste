@@ -5,6 +5,8 @@ class CreateProfiles < ActiveRecord::Migration[8.0]
       t.string :name, null: false
       t.string :github_url, null: false
 
+      t.string :github_short_url, null: false
+
       t.string :github_username, null: false
       t.integer :github_followers_number, null: false
       t.integer :github_following_number, null: false
