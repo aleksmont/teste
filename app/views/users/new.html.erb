@@ -1,0 +1,28 @@
+<!-- app/views/users/new.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h3>Cadastro</h3>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for @user do |f| %>
+            <%= f.input :name, required: true %>
+            <%= f.input :email, required: true %>
+            <%= f.input :password, required: true %>
+            <div class="text-center">
+              <%= f.button :submit, "Cadastrar", class: "btn btn-success mt-3" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-footer text-center">
+          <p class="mb-0">
+            Já tem uma conta?
+            <%= link_to "Voltar para login", '/auth/login', class: "btn btn-link p-0 align-baseline" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

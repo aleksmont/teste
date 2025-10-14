@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h3>Login</h3>
+        </div>
+        <div class="card-body">
+          <% flash.each do |type, message| %>
+            <% bootstrap_class = case type.to_sym
+                                 when :notice then 'alert-success'
+                                 when :alert  then 'alert-danger'
+                                 when :warning then 'alert-warning'
+                                 else 'alert-info'
+                                 end %>
+
+            <div class="alert <%= bootstrap_class %> alert-dismissible fade show mt-3" role="alert">
+              <%= message %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+          <%= simple_form_for :session, url: '/auth/authenticate' do |f| %>
+            <%= f.input :email, required: true, autofocus: true %>
+            <%= f.input :password, required: true %>
+            <div class="text-center">
+              <%= f.button :submit, "Entrar", class: "btn btn-primary mt-3" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-footer text-center">
+          <p class="mb-0">
+            Não tem uma conta?
+            <%= link_to "Cadastre-se", '/users/new', class: "btn btn-link p-0 align-baseline" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

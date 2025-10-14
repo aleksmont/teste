@@ -1,0 +1,72 @@
+services:
+  app:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "3005:3000"
+    networks:
+      - alugest
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    env_file: .env.docker
+    environment:
+      RAILS_ENV: development
+      BASE_URL: http://localhost:3005
+      POSTGRES_DATABASE: alugest
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      REDIS_URL: redis://redis:6379
+      AWS_REGION: us-east-1
+      S3_REGION: us-east-1
+      S3_BUCKET_NAME_DEV: alugest-dev
+
+  postgres:
+    image: postgres:16.2
+    restart: always
+    ports:
+      - "5435:5432"
+    networks:
+      - alugest
+    environment:
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+#  redis:
+#    image: redis:7.2.4
+#    restart: always
+#    ports:
+#      - "6397:6379"
+#    networks:
+#      - alugest
+
+#  sidekiq:
+#    build:
+#      context: .
+#      Dockerfile: Dockerfile
+#    depends_on:
+#      - app
+#      - database
+#      - redis
+#    volumes:
+#      - .:/app
+#      - gem_cache:/usr/local/bundle/gems
+#    env_file: ..env.development
+#    environment:
+#      RAILS_ENV: development
+#    entrypoint: ./entrypoints/sidekiq-entrypoint.sh
+
+volumes:
+  gem_cache:
+  db_data:
+
+networks:
+  alugest:
+    driver: bridge
