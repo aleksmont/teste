@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Aleksander's Github Webscrapper</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="home" href="/">Busca</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="new" href="/profiles/new">Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="profiles" href="/profiles">Perfis</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+  <%# INÍCIO DA EXIBIÇÃO DO FLASH/NOTICE %>
+  <% flash.each do |msg_type, message| %>
+    <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
+      <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+  <%# FIM DA EXIBIÇÃO DO FLASH/NOTICE %>
+</div>
+
+<div class="list-group mb-3">
+  <ul class="list-group shadow-sm">
+      <li class="list-group-item d-flex align-items-center">
+
+        <img
+          src="<%= @profile.github_profile_image_url %>"
+          alt="Foto de Perfil de João"
+          class="avatar rounded-circle me-3"
+        >
+
+        <div class="me-auto">
+          <h5 class="my-0"><%= @profile.name %></h5>
+
+          <p class="text-muted my-0"><b>Username: </b><%= @profile.github_username %></p>
+          <p class="text-muted my-0"><b>Followers: </b><%= @profile.github_followers_number %></p>
+          <p class="text-muted my-0"><b>Following: </b><%= @profile.github_following_number %></p>
+          <p class="text-muted my-0"><b>Stars: </b><%= @profile.github_starts_number %></p>
+          <p class="text-muted my-0">
+            <b>Contribuições no ultimo ano: </b><%= @profile.github_last_year_contributions_number %></p>
+          <p class="text-muted my-0"><b>Organização: </b><%= @profile.github_organization %></p>
+          <p class="text-muted my-0"><b>Localização: </b><%= @profile.github_location %></p>
+
+          <p class="text-muted my-0"><b>Link do github: </b><a target="_blank" href="/<%= @profile.github_short_url %>">Click aqui</a></p>
+        </div>
+
+        <form class="d-flex" action="/profiles/<%= @profile.uuid %>/delete" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <button class="btn btn-danger btn-sm ms-3" type="submit">Excluir</button>
+        </form>
+      </li>
+  </ul>
+</div>

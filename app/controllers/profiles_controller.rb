@@ -13,6 +13,10 @@ class ProfilesController < ApplicationController
                   .order(params[:order_by] || "name ASC")
   end
 
+  def show
+    @profile = Profile.find_by!(uuid: params[:uuid])
+  end
+
   def new
     @profile = Profile.new
   end
@@ -24,6 +28,17 @@ class ProfilesController < ApplicationController
     rescue StandardError => e
       puts e.message
       redirect_to root_path, alert: "Atenção, não conseguimos criar o perfil com as informações inseridas."
+    end
+  end
+
+  def destroy
+    begin
+      @profile = Profile.find_by!(uuid: params[:uuid])
+      @profile.destroy
+      redirect_to root_path, notice: "Profile excluido com sucesso."
+    rescue StandardError => e
+      puts e.message
+      redirect_to root_path, alert: "Atenção, não conseguimos excluir o perfil."
     end
   end
 

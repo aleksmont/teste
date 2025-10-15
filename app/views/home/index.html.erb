@@ -84,10 +84,7 @@
               aqui</a></p>
           </div>
 
-          <form class="d-flex" role="search">
-            <input type="hidden" name="profile_uuid" value="<%= profile.uuid %>">
-            <button class="btn btn-primary btn-sm ms-3" type="submit">Recarregar informações</button>
-          </form>
+          <a class="btn btn-primary btn-sm ms-3" href="/profiles/<%= profile.uuid %>"> Visualizar </a>
         </li>
       <% end %>
 

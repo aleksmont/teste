@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root "home#index"
   get '/profiles' => 'profiles#index', as: :profiles
   get '/profiles/new' => 'profiles#new', as: :profiles_new
+  get '/profiles/:uuid' => 'profiles#show', as: :profiles_show
+  post '/profiles/:uuid/delete' => 'profiles#destroy', as: :profiles_destroy
   post '/profiles' => 'profiles#create'
   post '/profile_reload' => 'profiles#reload'
 
