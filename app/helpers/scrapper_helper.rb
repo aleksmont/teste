@@ -23,7 +23,7 @@ module ScrapperHelper
     end
   end
 
-  def search(url)
+  def search(url, selenium = false)
     begin
       document = get_content(url)
 
@@ -59,7 +59,7 @@ module ScrapperHelper
         end
       end
 
-      github_last_year_contributions_number = get_contributions(url)
+      github_last_year_contributions_number = selenium ? get_contributions(url) : 0
 
       {
         success: true,
@@ -95,6 +95,9 @@ module ScrapperHelper
     driver.navigate.to url
 
     html = driver.page_source
+
+    # Wait for the page load
+    sleep 5
 
     doc = Nokogiri::HTML(html)
 

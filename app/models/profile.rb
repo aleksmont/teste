@@ -25,9 +25,9 @@ class Profile < ApplicationRecord
     self.github_short_url = RailsUrlShortener::Url.generate(self.github_url).key
   end
 
-  def complete_info
+  def complete_info(selenium = false)
 
-    info = search(self.github_url)
+    info = search(self.github_url, selenium)
 
     if info[:success]
       self.github_username = info[:data][:github_username]
@@ -43,7 +43,7 @@ class Profile < ApplicationRecord
   end
 
   def reload_info
-    self.complete_info
+    self.complete_info(true)
     self.save
   end
 
