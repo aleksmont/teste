@@ -14,6 +14,7 @@ class Profile < ApplicationRecord
   #
 
   before_create :short_github_url, :complete_info
+  after_update :complete_info
 
   def valid_github_url
     unless check_url(self.github_url)

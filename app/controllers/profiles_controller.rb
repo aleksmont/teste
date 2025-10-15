@@ -17,6 +17,10 @@ class ProfilesController < ApplicationController
     @profile = Profile.find_by!(uuid: params[:uuid])
   end
 
+  def edit
+    @profile = Profile.find_by!(uuid: params[:uuid])
+  end
+
   def new
     @profile = Profile.new
   end
@@ -28,6 +32,17 @@ class ProfilesController < ApplicationController
     rescue StandardError => e
       puts e.message
       redirect_to root_path, alert: "Atenção, não conseguimos criar o perfil com as informações inseridas."
+    end
+  end
+
+  def update
+    begin
+      @profile = Profile.find(params[:uuid])
+      @profile.update(profile_params)
+      redirect_to root_path, notice: "Perfil atualizado com sucesso!"
+    rescue StandardError => e
+      puts e.message
+      redirect_to root_path, alert: "Atenção, não conseguimos editar o perfil."
     end
   end
 

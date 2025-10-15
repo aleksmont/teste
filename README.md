@@ -22,5 +22,10 @@ Gems utilizadas:
 ``OBS: Poderiam ter sido utilizados serviços terceiros, como o bitly. porem só permite poucos links por mês e ia dificultar os testes``
 
 * Test unitario usando rspec: [scrapper_helper_spec.rb](spec/helpers/scrapper_helper_spec.rb)
+* ``bundle exec rspec``
 
+``PS: O uso do selenium para buscar os dados dinamicos (Contribuições) causou lentidao e algumas intermitencias, momentaneamente utilizei ele somente no botão de recarregar as informações.``
 
+Melhorias a serem implementadas:
+* Melhorar usabilidade, loadings e respostas de validações de formularios.
+* Encontrar uma forma melhor de achar conteudos dinamicos nos codigo fontes.
