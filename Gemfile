@@ -37,7 +37,7 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
-gem "simple_form", "~> 5.1.0"
+gem "simple_form", "~> 5.3.1"
 
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
